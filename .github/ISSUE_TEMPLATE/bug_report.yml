@@ -1,0 +1,62 @@
+name: Bug report
+description: Something isn't working as expected.
+title: "[Bug]: "
+type: Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Fill in each section — issues that follow this
+        structure get triaged and fixed faster. See the
+        [D3Clarity issue standard](https://github.com/D3Clarity/.github/blob/main/ISSUE_TRACKING.md).
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences — what is broken and the impact.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Component
+      description: The repo, file, script, contact flow, or AWS resource involved. Note severity.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps. Include environment (browser, AWS account/stage) where relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs. actual
+      description: What you expected to happen, and what actually happened.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: A verifiable checklist that defines "done".
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: textarea
+    id: proportionality
+    attributes:
+      label: Proportionality note
+      description: The smallest fix that solves it; what is explicitly out of scope.
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Links to code, working_docs/, related issues/PRs.
+    validations:
+      required: false

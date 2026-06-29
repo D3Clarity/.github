@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/D3Clarity/.github/blob/main/SECURITY.md
+    about: Do NOT open a public issue for security vulnerabilities. See our security policy for private reporting.
+  - name: D3Clarity issue & labeling standard
+    url: https://github.com/D3Clarity/.github/blob/main/ISSUE_TRACKING.md
+    about: How we type, label, and track issues across D3Clarity repos.
