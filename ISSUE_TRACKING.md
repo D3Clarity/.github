@@ -15,31 +15,40 @@ Use GitHub's native features for anything that has **exactly one value per issue
 use **labels** only for genuinely **cross-cutting, many-per-issue** tags.
 
 > One-and-only-one per issue → native field/type. Many per issue → label.
-> Hierarchy/blocking → relationships. Release/time grouping → milestone.
+> Hierarchy/blocking → relationships. Release/time grouping → milestone/iteration.
 
 | Concern | Mechanism | Notes |
 |---|---|---|
-| **Type** (what kind of work) | **Native Issue Type** | `Bug` / `Feature` / `Task` (org-level). Set automatically by the issue Forms. One per issue. **Do not** use `bug`/`enhancement`/`task` *labels* — the native Type replaces them. |
-| **Priority** | **Label** `priority: p0`–`p3` *(for now)* | Kept as a label today for at-a-glance visibility; the org Project can **group by** it. May migrate to a Project field once team usage is clear. Default `p2`. |
+| **Type** (what kind of work) | **Native Issue Type** | `Bug` / `Feature` / `Task` / `Docs` (org-level). Set automatically by the issue Forms. One per issue. The old `bug`/`enhancement`/`task`/`documentation` **labels are retired** — the native Type replaces them. |
+| **Priority** | **Issue Field** (org) — `Urgent` / `High` / `Medium` / `Low` | Single-select, pinned to all types; shows on every issue and as a Project column, searchable org-wide. Default **Medium**. Replaces the retired `priority:` labels. |
+| **Effort** | **Issue Field** (org) — single-select sizing | Pinned to Bug/Feature/Task. Set during sprint planning. Effort is stable even when calendar time isn't (client work preempts). |
+| **Sprint** | **Project field** — Iteration (weekly) | Which weekly sprint we're attempting; unfinished work rolls to the next iteration (honest carryover, no stale dates). |
 | **Pipeline status** | **Project** `Status` field | Backlog / Ready / In progress / Blocked / Done — on the org Project board, not labels. |
-| **Blocked / depends-on** | **Issue dependencies** | Use "Mark as blocked by / blocking" on the issue. (A `blocked` label is fine as an extra visual flag.) |
+| **Blocked / depends-on** | **Issue dependencies** | Use "Mark as blocked by / blocking". (A `blocked` label is fine as an extra visual flag.) |
 | **Epics / breakdown** | **Sub-issues** | Break a large issue into native sub-issues rather than checkbox lists. |
 | **Release / version** | **Milestone** | Group by release (ties to SemVer tags + CHANGELOG). |
 | **Area / component** | **Label** `area: *` | e.g. `area: widget-engine`, `area: deploy-config`, `area: assistant`, `area: lambda`, `area: theming`. Per-repo areas may vary. |
-| **Cross-cutting tags** | **Labels** | `ai-agent`, `good first issue`, `help wanted`, `client`, `internal_only`. |
+| **Cross-cutting tags** | **Labels** | `ai-agent`, `good first issue`, `help wanted`, `client`, `internal_only`, `security`. |
 | **Resolution** | **Close reason** | Close as **completed** (via a merged PR `Closes #N`) or **not planned**; `duplicate` may also be a label/close note. |
+
+> Dates (`Start date` / `Target date`) are deliberately **not** part of the standard:
+> non-client work is regularly preempted by client work, so calendar targets go
+> stale. The **Sprint** iteration + stable **Effort** carry the time/size signal instead.
 
 ### Labels — the canonical cross-cutting set
 
 | Label | Use for |
 |---|---|
 | `area: *` | Which subsystem (one per issue). |
-| `priority: p0`–`p3` | Priority (default `p2`). |
-| `ai-agent` | AI-agent (e.g. "Dee") prompt, knowledge & guardrail work — **instance-specific**. Note: "agent" alone means a *human* Connect agent; this tag is the **AI** agent. |
+| `ai-agent` | AI-agent (e.g. "Dee") prompt, knowledge & guardrail work — **instance-specific**. ("agent" alone = a *human* Connect agent; this tag is the **AI** agent.) |
+| `security` | Security-related but **non-sensitive** work. (Real vulnerabilities → private reporting, never a public issue — see SECURITY.md.) |
 | `good first issue` / `help wanted` | Onboarding / community signals. |
 | `client` | Work tied to enabling/validating a client deployment. |
 | `internal_only` | D3Clarity-internal; not for client-facing repos/views. |
 | `blocked` | Optional visual flag; the real blocker is the **dependency** relationship. |
+
+> **Retired** (do not use): `bug`, `enhancement`, `task`, `documentation`, `question`
+> (→ native **Type**), and `priority: p0–p3` (→ **Priority** issue field).
 
 ## Issue body standard
 
@@ -62,20 +71,21 @@ open  →  typed + prioritized + added to the Project (Backlog)  →  Ready  →
                                    └── Blocked (issue dependency; optional `blocked` label)
 ```
 
-- **Triage**: set the native **Type**, a `priority:` label (default `p2`), one
-  `area:` label, and add the issue to the org Project. New issues filed via the
-  Forms already carry their Type.
+- **Triage**: confirm the native **Type**, set **Priority** (default Medium) and one
+  `area:` label, and add the issue to the org Project. Issues filed via the Forms
+  already carry their Type.
 - **Close** via a merged PR that references the issue (`Closes #N`), or as
   *not planned* with a one-line reason (e.g. duplicate).
 - **Block**: mark the dependency ("blocked by"); name it in a comment.
 
-## Conventions
+## Boards
 
-- **One Type, one Area, one Priority** per issue; cross-cutting labels as needed.
-- **Security vulnerabilities are never public issues** — see [SECURITY.md](SECURITY.md).
-- Prefer **sub-issues** and **dependencies** over prose like "part of #X" / "blocked by #Y".
+Track work on a Project created from the recommended **"D3Clarity Delivery"**
+template (standard Status/Sprint and the Board / Backlog / Current-sprint views).
+Note: **auto-add workflows do not copy** from a template — enable "auto-add" on
+each new board.
 
 ## Per-repo overrides
 
 A repo may add its own `area:` labels or its own issue templates (which override
-these org defaults). Keep the Type/Priority/Project model consistent.
+these org defaults). Keep the Type / Priority / Project model consistent.
